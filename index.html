@@ -357,6 +357,10 @@ footer{background:#0F1F33;padding:56px 0 28px;border-top:1px solid rgba(255,255,
         <h3>Free quote request</h3>
         <p class="ha-sub">We will be in touch as soon as possible. No obligation.</p>
         <form id="hero-form" novalidate>
+      <input type="hidden" name="access_key" value="f03e6971-acd6-4945-9fe1-6ba1ce434425">
+      <input type="hidden" name="subject" value="New gutter cleaning enquiry — gutterteam.co.uk">
+      <input type="hidden" name="from_name" value="The Gutter Team Website">
+      <input type="checkbox" name="botcheck" style="display:none">
           <div class="fr2">
             <div class="fg"><label for="hfn">First name <span class="req">*</span></label><input type="text" id="hfn" name="firstname" placeholder="First name" required autocomplete="given-name"></div>
             <div class="fg"><label for="htel">Phone <span class="req">*</span></label><input type="tel" id="htel" name="phone" placeholder="Your number" required autocomplete="tel"></div>
@@ -572,6 +576,10 @@ footer{background:#0F1F33;padding:56px 0 28px;border-top:1px solid rgba(255,255,
           <h3>Free quote request</h3>
           <p class="fbox-sub">We aim to respond the same working day. No obligation to book.</p>
           <form id="main-form" novalidate>
+      <input type="hidden" name="access_key" value="f03e6971-acd6-4945-9fe1-6ba1ce434425">
+      <input type="hidden" name="subject" value="New gutter cleaning enquiry — gutterteam.co.uk">
+      <input type="hidden" name="from_name" value="The Gutter Team Website">
+      <input type="checkbox" name="botcheck" style="display:none">
             <div class="fr2">
               <div class="fg"><label for="mfn">First name <span class="req">*</span></label><input type="text" id="mfn" name="firstname" placeholder="First name" required autocomplete="given-name"></div>
               <div class="fg"><label for="mln">Last name <span class="req">*</span></label><input type="text" id="mln" name="lastname" placeholder="Last name" required autocomplete="family-name"></div>
@@ -673,13 +681,22 @@ document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 const mob=document.getElementById('mob');
 window.addEventListener('scroll',()=>{mob.style.display=window.scrollY>600?'flex':'none'},{passive:true});
 ['hpc','mpc'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('input',function(){const p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p,p)})});
-document.getElementById('hero-form').addEventListener('submit',function(e){
-  e.preventDefault();const btn=this.querySelector('button[type=submit]');btn.textContent='Sending…';btn.disabled=true;
-  setTimeout(()=>{this.style.display='none';document.getElementById('hero-ok').style.display='block'},900);
-});
-document.getElementById('main-form').addEventListener('submit',function(e){
-  e.preventDefault();const btn=this.querySelector('button[type=submit]');btn.textContent='Sending…';btn.disabled=true;
-  setTimeout(()=>{this.style.display='none';const ok=document.getElementById('main-ok');ok.style.display='block';ok.scrollIntoView({behavior:'smooth',block:'center'})},900);
+document.querySelectorAll('form[id]').forEach(f=>{
+  f.addEventListener('submit',async function(e){
+    e.preventDefault();
+    const b=this.querySelector('button[type=submit]');
+    const orig=b.textContent;
+    b.textContent='Sending…';b.disabled=true;
+    try{
+      const r=await fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(this)});
+      const j=await r.json();
+      if(j.success){
+        this.style.display='none';
+        const ok=document.getElementById(this.id+'-ok');
+        if(ok){ok.style.display='block';ok.scrollIntoView({behavior:'smooth',block:'center'})}
+      }else{b.textContent=orig;b.disabled=false;alert('Something went wrong — please call us directly.');}
+    }catch(err){b.textContent=orig;b.disabled=false;alert('Something went wrong — please call us directly.');}
+  });
 });
 </script>
 </body>
