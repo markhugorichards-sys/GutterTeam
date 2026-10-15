@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="10" fill="#1a7a3c"/>
+  <!-- Roof shape -->
+  <polygon points="32,8 58,30 6,30" fill="white" opacity="0.95"/>
+  <!-- Gutter bar -->
+  <rect x="4" y="30" width="56" height="7" rx="3" fill="white" opacity="0.95"/>
+  <!-- Drip drops -->
+  <ellipse cx="18" cy="45" rx="3" ry="4" fill="white" opacity="0.8"/>
+  <ellipse cx="32" cy="48" rx="3" ry="4" fill="white" opacity="0.8"/>
+  <ellipse cx="46" cy="45" rx="3" ry="4" fill="white" opacity="0.8"/>
+</svg>
