@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% import "macros.html" as m %}
+{% block main %}
+<section class="hero" style="padding:44px 0 48px"><div class="wrap{% if not noform %} hero-grid{% endif %}">
+<div>
+{% if crumbs %}<p class="crumbs"><a href="/">Home</a>{% for t, u in crumbs %} / {% if u %}<a href="{{ u }}">{{ t }}</a>{% else %}{{ t }}{% endif %}{% endfor %}</p>{% endif %}
+{% if eyebrow %}<p class="eyebrow">{{ eyebrow }}</p>{% endif %}
+<h1>{{ h1 }}</h1>
+<p class="lead">{{ lead }}</p>
+{% if updated %}<p class="small" style="color:#9fb0c4">Updated {{ site.updated }}</p>{% endif %}
+</div>
+{% if not noform %}{{ m.enquiry(site, compact=True, idp='h', area=area or '') }}{% endif %}
+</div></section>
+<section class="band"><div class="wrap">
+<div class="prose">{{ body|safe }}</div>
+{% if extra %}{{ extra|safe }}{% endif %}
+{% if faqs %}<div class="prose" style="margin-top:32px"><h2>Questions</h2>{{ m.faq(faqs) }}</div>{% endif %}
+{% if page_sources %}<div class="prose" style="margin-top:32px"><h2>Sources</h2>{{ m.sources(page_sources) }}</div>{% endif %}
+</div></section>
+{% if not noform %}{{ m.cta_band() }}{% endif %}
+{% endblock %}

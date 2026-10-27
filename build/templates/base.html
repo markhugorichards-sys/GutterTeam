@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}</title>
+<meta name="description" content="{{ desc }}">
+<link rel="canonical" href="{{ site.domain }}{{ path }}">
+<meta name="robots" content="{{ 'noindex, follow' if noindex else 'index, follow, max-image-preview:large' }}">
+<meta property="og:type" content="{{ og_type or 'website' }}">
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ desc }}">
+<meta property="og:url" content="{{ site.domain }}{{ path }}">
+<meta property="og:image" content="{{ site.domain }}/images/before-after-1312.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0f1e33">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fonts/eb-garamond-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>{{ css|safe }}</style>
+{% for block in schema %}<script type="application/ld+json">{{ block|safe }}</script>
+{% endfor %}</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap nav">
+<a class="logo" href="/" aria-label="The Gutter Team home"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#1d3557"/><path d="M6 13h20v3.5a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 6 16.5z" fill="#6fd0c3"/><path d="M20 19v8" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M8 11l8-5 8 5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>The Gutter Team</a>
+<nav aria-label="Main"><ul>
+<li class="hide-m"><a href="/services/">Services</a></li>
+<li class="hide-m"><a href="/areas/">Areas</a></li>
+<li class="hide-m"><a href="/advice/gutter-cleaning-cost/">Prices</a></li>
+<li class="hide-m"><a href="/advice/">Advice</a></li>
+<li><a class="cta" href="{{ '#enquire' if has_form else '/contact/' }}">Get a price</a></li>
+</ul></nav>
+</div></header>
+<main id="main">
+{% block main %}{% endblock %}
+</main>
+<footer class="site"><div class="wrap">
+<div class="fgrid">
+<div><h3>The Gutter Team</h3><p>Gutter cleaning, repairs and downpipe clearing across {{ site.region }}. Enquiries are handled by email and passed to one vetted local gutter specialist covering your area.</p><p style="margin-top:10px"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p></div>
+<div><h3>Services</h3><ul>{% for s in services %}<li><a href="/services/{{ s.slug }}/">{{ s.name }}</a></li>{% endfor %}<li><a href="/landlords/">Landlords and agents</a></li></ul></div>
+<div><h3>Areas</h3><ul>{% for a in areas[:8] %}<li><a href="/areas/{{ a.slug }}/">{{ a.name }}</a></li>{% endfor %}<li><a href="/areas/">All areas</a></li></ul></div>
+<div><h3>Advice</h3><ul><li><a href="/advice/gutter-cleaning-cost/">Prices and estimator</a></li><li><a href="/advice/how-often-clean-gutters/">How often to clean</a></li><li><a href="/advice/gutter-cleaning-statistics-uk/">Data and statistics</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></div>
+</div>
+<div class="legal">&copy; 2026 {{ site.operator }}, trading as {{ site.name }}. <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a></div>
+</div></footer>
+</body>
+</html>
