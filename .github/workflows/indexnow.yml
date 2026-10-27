@@ -1,0 +1,32 @@
+name: IndexNow
+on:
+  push:
+    branches: [main]
+    paths: ["public/**"]
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: "changed or all"
+        default: "all"
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 2 }
+      - name: Submit URLs to IndexNow (Bing, Yandex, Seznam, Naver)
+        env:
+          SCOPE: ${{ github.event.inputs.scope || 'changed' }}
+        run: |
+          KEY=$(basename public/*.txt .txt | grep -E '^[0-9a-f]{32}$' | head -1)
+          HOST=www.gutterteam.co.uk
+          if [ "$SCOPE" = "all" ]; then
+            URLS=$(grep -o '<loc>[^<]*' public/sitemap.xml | sed 's/<loc>//')
+          else
+            URLS=$(git diff --name-only HEAD~1 HEAD -- public | grep 'index.html$' | sed -e 's#^public/#https://'$HOST'/#' -e 's#index.html$##')
+          fi
+          [ -z "$URLS" ] && { echo "Nothing to submit"; exit 0; }
+          LIST=$(printf '%s\n' $URLS | python3 -c 'import json,sys;print(json.dumps([l.strip() for l in sys.stdin if l.strip()]))')
+          BODY="{\"host\":\"$HOST\",\"key\":\"$KEY\",\"keyLocation\":\"https://$HOST/$KEY.txt\",\"urlList\":$LIST}"
+          echo "$BODY" | head -c 400; echo
+          curl -sS -o /dev/null -w "IndexNow HTTP %{http_code}\n" -X POST https://api.indexnow.org/indexnow -H 'Content-Type: application/json; charset=utf-8' -d "$BODY"

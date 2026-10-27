@@ -1,0 +1,70 @@
+{% extends "base.html" %}{% import "macros.html" as m %}
+{% block main %}
+<section class="hero"><div class="wrap hero-grid">
+<div>
+<p class="crumbs"><a href="/">Home</a> / <a href="/areas/">Areas</a> / {{ a.name }}</p>
+<p class="eyebrow">{{ a.postcodes|join(', ') }} &middot; {{ a.county }}</p>
+<h1>Gutter cleaning in {{ a.name }}</h1>
+<p class="lead">{{ a.intro }}</p>
+<ul class="ticks">
+<li>Typical {{ a.name }} prices shown below, confirmed before booking</li>
+<li>Before and after photos of every gutter run</li>
+<li>Covers all of {{ a.postcodes|join(' and ') }}{% if a.micro %}, including {{ a.micro[:3]|map('first')|join(', ') }}{% endif %}</li>
+</ul>
+</div>
+{{ m.enquiry(site, heading='Get a price in ' ~ a.name, area=a.name, compact=True, idp='h') }}
+</div></section>
+
+<section class="band"><div class="wrap grid2">
+<div class="prose">
+<h2>Neighbourhoods covered in {{ a.name }}</h2>
+<div class="micro">{% for n, d in a.micro %}<div><strong>{{ n }}</strong><br>{{ d }}</div>{% endfor %}</div>
+</div>
+<div class="prose">
+<h2>{{ a.name }} homes and their gutters</h2>
+{% for era, d in a.housing %}<h3>{{ era }}</h3><p>{{ d }}</p>{% endfor %}
+</div>
+</div></section>
+
+<section class="band alt"><div class="wrap grid2">
+<div class="prose">
+<h2>Trees, water and what they mean for your gutters</h2>
+<p>{{ a.trees }}</p>
+{% if a.water %}<p>{{ a.water }}</p>{% endif %}
+<h3>Problems we see most in {{ a.name }}</h3>
+<ul>{% for i in a.issues %}<li>{{ i }}</li>{% endfor %}</ul>
+<div class="note"><strong>Best time to book in {{ a.name }}:</strong> {{ a.timing }}</div>
+</div>
+<div class="prose">
+<h2>Gutter cleaning prices in {{ a.name }}</h2>
+<p>{{ a.price_note }}</p>
+{{ m.price_table(bands) }}
+<p class="small">Typical bands for a standard clean with downpipe check, compiled from published 2026 UK price guides with the South East uplift. Estimates, not quotes. Try the <a href="/advice/gutter-cleaning-cost/">price estimator</a> for add-ons.</p>
+</div>
+</div></section>
+
+{% if jobs %}
+<section class="band"><div class="wrap">
+<div class="sec-head"><h2>Recent gutter jobs in {{ a.name }}</h2><p>Real visits, photographed on the day.</p></div>
+<div class="grid3">{% for j in jobs %}<figure class="proof"><img src="{{ j.image }}" width="800" height="600" loading="lazy" alt="{{ j.alt }}"><figcaption><strong>{{ j.title }}</strong><br>{{ j.place }}, {{ j.date }}</figcaption></figure>{% endfor %}</div>
+</div></section>
+{% endif %}
+{% if reviews %}
+<section class="band"><div class="wrap">
+<div class="sec-head"><h2>What {{ a.name }} customers said</h2></div>
+<div class="grid3">{% for r in reviews %}<blockquote class="quote"><p>{{ r.text }}</p><footer>{{ r.name }}, {{ r.place }}{% if r.source %} &middot; {{ r.source }}{% endif %}</footer></blockquote>{% endfor %}</div>
+</div></section>
+{% endif %}
+
+<section class="band"><div class="wrap grid2">
+<div><div class="sec-head"><h2>{{ a.name }} questions</h2></div>{{ m.faq(a.faqs + common_faqs) }}</div>
+<div class="prose">
+<h2>Nearby areas</h2>
+<div class="areas-list" style="margin-bottom:24px">{% for n in nearby %}<a href="/areas/{{ n.slug }}/">{{ n.name }}</a>{% endfor %}</div>
+<h2>Sources for this page</h2>
+<p class="small">Local facts on this page come from council character studies and other published sources. Updated {{ site.updated }}.</p>
+{{ m.sources(a.sources) }}
+</div>
+</div></section>
+{{ m.cta_band('Gutters overflowing in ' ~ a.name ~ '? Get a price by email.') }}
+{% endblock %}

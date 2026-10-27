@@ -1,0 +1,52 @@
+{% macro enquiry(site, heading='Get a price for your gutters', sub='Free to use, no obligation. A reply by email, usually the same working day.', area='', compact=False, idp='q') %}
+<div class="panel" id="enquire"><div class="panel-in">
+<h2>{{ heading }}</h2>
+<p class="sub">{{ sub }}</p>
+<form action="https://api.web3forms.com/submit" method="POST">
+<input type="hidden" name="access_key" value="{{ site.web3forms_key }}">
+<input type="hidden" name="subject" value="New gutter enquiry{{ ' - ' ~ area if area }}">
+<input type="hidden" name="from_name" value="The Gutter Team website">
+<input type="hidden" name="redirect" value="{{ site.domain }}/thank-you/">
+<input type="hidden" name="page" value="{{ area or 'general' }}">
+<input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+<div class="row">
+<div><label for="{{ idp }}-name">Name</label><input id="{{ idp }}-name" name="name" autocomplete="name" required></div>
+<div><label for="{{ idp }}-email">Email</label><input id="{{ idp }}-email" name="email" type="email" autocomplete="email" required></div>
+</div>
+<div class="row">
+<div><label for="{{ idp }}-pc">Postcode</label><input id="{{ idp }}-pc" name="postcode" autocomplete="postal-code" required></div>
+<div><label for="{{ idp }}-type">Property type</label><select id="{{ idp }}-type" name="property_type" required>
+<option value="">Choose one</option><option>Terraced house</option><option>Semi-detached house</option><option>Detached house</option><option>Bungalow or chalet bungalow</option><option>Three-storey house</option><option>Flats or maisonettes</option><option>Commercial</option></select></div>
+</div>
+{% if not compact %}
+<div class="row">
+<div><label for="{{ idp }}-svc">What do you need?</label><select id="{{ idp }}-svc" name="service"><option>Gutter cleaning</option><option>Downpipe unblocking</option><option>Gutter repair</option><option>Gutter guards</option><option>Fascia and soffit cleaning</option><option>Annual maintenance plan</option><option>Not sure</option></select></div>
+<div><label for="{{ idp }}-when">When?</label><select id="{{ idp }}-when" name="timing"><option>Overflowing now</option><option>In the next 2 weeks</option><option>This month</option><option>Planning ahead</option></select></div>
+</div>
+<label for="{{ idp }}-msg">Anything useful to know? (optional)</label>
+<textarea id="{{ idp }}-msg" name="message" placeholder="For example: conservatory, trees over the roof, last cleaned years ago"></textarea>
+{% endif %}
+<label class="consent"><input type="checkbox" name="consent" value="yes" required><span>I agree my details can be passed to one local gutter specialist so they can reply with a price. See the <a href="/privacy/">privacy notice</a>.</span></label>
+<button class="btn full" type="submit">Send my enquiry</button>
+<p class="small">No phone call needed. You'll get a reply by email, and the price is confirmed before anything is booked.</p>
+</form>
+</div></div>
+{% endmacro %}
+
+{% macro faq(items) %}
+<div class="faq">{% for q, a in items %}<details{% if loop.first %} open{% endif %}><summary>{{ q }}</summary><p>{{ a }}</p></details>{% endfor %}</div>
+{% endmacro %}
+
+{% macro price_table(bands) %}
+<div class="tablewrap"><table><thead><tr><th>Property</th><th>Typical price per visit</th></tr></thead><tbody>
+{% for b in bands %}<tr><td>{{ b.label }}</td><td>&pound;{{ b.low }} to &pound;{{ b.high }}</td></tr>{% endfor %}
+</tbody></table></div>
+{% endmacro %}
+
+{% macro cta_band(text='Gutters overflowing? Get a price by email today.') %}
+<div class="cta-band"><div class="wrap"><h2>{{ text }}</h2><a class="btn" href="#enquire">Get a price</a></div></div>
+{% endmacro %}
+
+{% macro sources(list) %}
+<ol class="sources">{% for t, u in list %}<li><a href="{{ u }}" rel="noopener">{{ t }}</a></li>{% endfor %}</ol>
+{% endmacro %}

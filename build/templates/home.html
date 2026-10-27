@@ -1,0 +1,55 @@
+{% extends "base.html" %}{% import "macros.html" as m %}
+{% block main %}
+<section class="hero"><div class="wrap hero-grid">
+<div>
+<p class="eyebrow">Farnborough, Fleet, Camberley, Farnham and nearby</p>
+<h1>Gutter cleaning in Farnborough and the surrounding towns, priced up front</h1>
+<p class="lead">Overflowing gutters, a blocked downpipe or a dripping joint? Tell us about your home and get a price by email from a vetted local gutter specialist. Every visit comes with before and after photos.</p>
+<ul class="ticks">
+<li>Typical prices published openly, from &pound;60 for a bungalow</li>
+<li>Price confirmed by email before anything is booked</li>
+<li>Before and after photos of every gutter run</li>
+<li>14 towns covered across Hampshire, Surrey and Berkshire</li>
+</ul>
+</div>
+{{ m.enquiry(site, compact=True, idp='h') }}
+</div></section>
+
+<section class="band"><div class="wrap">
+<div class="sec-head"><h2>What gutter cleaning costs locally</h2><p>Most people want to know the price before they ask. These are typical bands for a standard clean with downpipe check. Your exact price depends on access, height and how much has built up, and it's confirmed before booking.</p></div>
+<div class="grid2"><div>{{ m.price_table(bands) }}</div>
+<div class="card"><h3>Get a closer estimate</h3><p>Add conservatories, extensions, a fascia wash or years of build-up, and see the likely range for your home in a few seconds.</p><p style="margin-top:14px"><a class="btn" href="/advice/gutter-cleaning-cost/">Open the price estimator</a></p><p class="small">Bands compiled from published 2026 UK price guides, with the South East uplift they describe. They're estimates, not quotes.</p></div></div>
+</div></section>
+
+<section class="band alt"><div class="wrap">
+<div class="sec-head"><h2>Services</h2><p>From a routine clean to fixing the joint that drips on the patio.</p></div>
+<div class="grid3">{% for s in services %}<a class="card" href="/services/{{ s.slug }}/"><h3>{{ s.name }}</h3><p>{{ s.short }}</p><span class="more">More about {{ s.name|lower }}</span></a>{% endfor %}</div>
+</div></section>
+
+<section class="band"><div class="wrap grid2" style="align-items:center">
+<div><div class="sec-head" style="margin-bottom:16px"><h2>Proof, not promises</h2><p>Photos are taken before and after on every visit and sent to you the same day, so you can see what came out of the gutters without climbing a ladder.</p></div>
+<p>{% if jobs %}Recent jobs are shown on each area page.{% else %}Below is an example of the before and after record you receive. As jobs are completed locally, photos from real visits in each town appear on that town's page.{% endif %}</p></div>
+<figure class="proof"><img src="/images/before-after-800.webp" srcset="/images/before-after-480.webp 480w, /images/before-after-800.webp 800w, /images/before-after-1312.webp 1312w" sizes="(max-width:900px) 100vw, 540px" width="800" height="731" loading="lazy" alt="Four before and after pairs showing gutters, fascias and a downpipe cleaned or renewed"><figcaption>Example before and after record. Left of each pair: before. Right: after.</figcaption></figure>
+</div></section>
+
+<section class="band dark"><div class="wrap">
+<div class="sec-head"><h2>How it works</h2><p>Three steps, all by email. No sales calls.</p></div>
+<div class="grid3 steps">
+<div class="step"><h3 style="color:#fff">Tell us about your home</h3><p>Postcode, property type and what's wrong. Add a photo description if you can.</p></div>
+<div class="step"><h3 style="color:#fff">Get a confirmed price</h3><p>Your enquiry goes to one vetted gutter specialist covering your area, who replies with a price and available dates.</p></div>
+<div class="step"><h3 style="color:#fff">Gutters cleared, photos sent</h3><p>The work is done, usually without you needing to be home, and the before and after photos arrive the same day.</p></div>
+</div>
+</div></section>
+
+<section class="band"><div class="wrap">
+<div class="sec-head"><h2>Areas covered</h2><p>Each town page explains what local roofs and trees mean for your gutters, from pine needles in Camberley to cast iron in Farnham.</p></div>
+<div class="areas-list">{% for a in areas %}<a href="/areas/{{ a.slug }}/">{{ a.name }}</a>{% endfor %}</div>
+</div></section>
+
+<section class="band alt"><div class="wrap grid2">
+<div><div class="sec-head"><h2>Common questions</h2></div>{{ m.faq(faqs) }}</div>
+<div><div class="sec-head"><h2>Useful guides</h2></div>
+{% for g in guides[:5] %}<p style="margin-bottom:12px"><a href="/advice/{{ g.slug }}/"><strong>{{ g.name }}</strong></a><br><span style="color:var(--mid);font-size:.92rem">{{ g.short }}</span></p>{% endfor %}
+</div>
+</div></section>
+{% endblock %}
