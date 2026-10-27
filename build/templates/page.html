@@ -8,7 +8,7 @@
 <p class="lead">{{ lead }}</p>
 {% if updated %}<p class="small" style="color:#9fb0c4">Updated {{ site.updated }}</p>{% endif %}
 </div>
-{% if not noform %}{{ m.enquiry(site, compact=True, idp='h', area=area or '') }}{% endif %}
+{% if not noform %}{{ m.enquiry(site, compact=True, idp='h', area=area or '', service=service or '') }}{% endif %}
 </div></section>
 <section class="band"><div class="wrap">
 <div class="prose">{{ body|safe }}</div>

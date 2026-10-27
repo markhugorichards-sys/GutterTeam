@@ -1,4 +1,4 @@
-{% macro enquiry(site, heading='Get a price for your gutters', sub='Free to use, no obligation. A reply by email, usually the same working day.', area='', compact=False, idp='q') %}
+{% macro enquiry(site, heading='Get a price for your gutters', sub='Free to use, no obligation. A reply by email, usually the same working day.', area='', compact=False, idp='q', service='') %}
 <div class="panel" id="enquire"><div class="panel-in">
 <h2>{{ heading }}</h2>
 <p class="sub">{{ sub }}</p>
@@ -18,11 +18,11 @@
 <div><label for="{{ idp }}-type">Property type</label><select id="{{ idp }}-type" name="property_type" required>
 <option value="">Choose one</option><option>Terraced house</option><option>Semi-detached house</option><option>Detached house</option><option>Bungalow or chalet bungalow</option><option>Three-storey house</option><option>Flats or maisonettes</option><option>Commercial</option></select></div>
 </div>
-{% if not compact %}
 <div class="row">
-<div><label for="{{ idp }}-svc">What do you need?</label><select id="{{ idp }}-svc" name="service"><option>Gutter cleaning</option><option>Downpipe unblocking</option><option>Gutter repair</option><option>Gutter guards</option><option>Fascia and soffit cleaning</option><option>Annual maintenance plan</option><option>Not sure</option></select></div>
+<div><label for="{{ idp }}-svc">Service needed</label><select id="{{ idp }}-svc" name="service" required><option value="">Choose one</option>{% for o in ['Gutter cleaning','Downpipe unblocking','Gutter repairs','Gutter guards','Fascia and soffit cleaning','Annual maintenance plan','Not sure'] %}<option{% if o|lower == service|lower %} selected{% endif %}>{{ o }}</option>{% endfor %}</select></div>
 <div><label for="{{ idp }}-when">When?</label><select id="{{ idp }}-when" name="timing"><option>Overflowing now</option><option>In the next 2 weeks</option><option>This month</option><option>Planning ahead</option></select></div>
 </div>
+{% if not compact %}
 <label for="{{ idp }}-msg">Anything useful to know? (optional)</label>
 <textarea id="{{ idp }}-msg" name="message" placeholder="For example: conservatory, trees over the roof, last cleaned years ago"></textarea>
 {% endif %}

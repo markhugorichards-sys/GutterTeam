@@ -95,7 +95,7 @@ def build():
         path = f"/services/{s['slug']}/"
         write(path, "page.html", 0.9 if s["slug"] == "gutter-cleaning" else 0.8, title=f"{s['title']} | The Gutter Team", desc=s["desc"],
               h1=s["name"], lead=s["lead"], crumbs=[["Services", "/services/"], [s["name"], ""]], body=md(s["body"]), faqs=s["faqs"] + COMMON_FAQS,
-              area=s["name"],
+              area=s["name"], service=s["name"].replace("Fascia and Soffit Cleaning","Fascia and soffit cleaning").replace("Annual Maintenance Plans","Annual maintenance plan"),
               schema=[ld({"@context": "https://schema.org", "@type": "Service", "name": s["name"], "serviceType": s["name"], "description": s["desc"],
                           "provider": {"@id": ORG_ID}, "areaServed": [{"@type": "Place", "name": a["name"]} for a in AREAS], "url": SITE["domain"] + path}),
                       ld(breadcrumbs([["Home", "/"], ["Services", "/services/"], [s["name"], path]])), ld(faq_ld(s["faqs"] + COMMON_FAQS))])
@@ -120,7 +120,7 @@ Send the postcodes and property types in the enquiry form, or email a list. You'
     write("/landlords/", "page.html", 0.8, title="Gutter Cleaning for Landlords and Letting Agents | The Gutter Team",
           desc="Scheduled gutter cleaning with dated before and after photo records for landlords and letting agents across Farnborough, Fleet, Camberley and Farnham.",
           h1="Gutter cleaning for landlords and agents", lead="Scheduled cleans, dated photo records and repairs approved by you, across one property or a whole portfolio.",
-          crumbs=[["Landlords and agents", ""]], body=land_body, area="Landlord",
+          crumbs=[["Landlords and agents", ""]], body=land_body, area="Landlord", service="Annual maintenance plan",
           page_sources=[["Landlord and Tenant Act 1985, section 11 (legislation.gov.uk)", "https://www.legislation.gov.uk/ukpga/1985/70/section/11"]],
           schema=[ld(breadcrumbs([["Home", "/"], ["Landlords", "/landlords/"]]))])
 
