@@ -124,6 +124,8 @@ The [area pages](/areas/) go street by street.
 6. **Staining on brickwork or fascias** below the gutter line.
 7. **Damp patches inside** on upper walls or ceilings near the eaves.
 
+On rendered houses, overflow tends to leave dark streaks down the same patch of wall and can get into cracks behind the render. [Guildford Render explains how render and damp interact](https://www.guildfordrender.co.uk/render-and-damp).
+
 ## Don't climb
 
 Falls from height were the most common cause of fatal injury to workers in Great Britain in 2024/25, causing 35 deaths ([HSE](%(hse)s)). A ground-level check plus photos from a professional visit is safer.
@@ -171,6 +173,10 @@ Correctly maintained cast iron rainwater goods can last more than 100 years, and
 ## Listed buildings and conservation areas
 
 Farnham has 387 listed buildings ([Waverley](%(wav)s)). North Fleet is a conservation area with an Article 4 direction. Like-for-like cleaning and repair don't change appearance. Replacing cast iron with plastic, or changing the profile, on a listed building usually needs listed building consent, so check with the council first.
+
+## Not sure it's cast iron?
+
+Cast iron is thin-walled, rings when tapped and a magnet sticks to it. On houses built or refurbished before 2000, thick grey gutters and downpipes that a magnet won't stick to may be asbestos cement ([HSE](https://www.hse.gov.uk/asbestos/diagrams.htm)). Clearing debris from them is routine, but don't drill, cut, scrape or break them. If you plan to replace them, have them tested first. [AsbestosCertified explains asbestos testing](https://www.asbestoscertified.co.uk/asbestos-testing) around Farnborough and Guildford.
 """ },
 "skyvac-gutter-cleaning": {
  "title": "Gutter Vacuums Explained: Ground-Level Gutter Cleaning",
