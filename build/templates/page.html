@@ -6,7 +6,7 @@
 {% if eyebrow %}<p class="eyebrow">{{ eyebrow }}</p>{% endif %}
 <h1>{{ h1 }}</h1>
 <p class="lead">{{ lead }}</p>
-{% if updated %}<p class="small" style="color:#9fb0c4">Updated {{ site.updated }}</p>{% endif %}
+{% if updated %}<p class="small" style="color:#9fb0c4">Updated {{ updated_txt or site.updated }}</p>{% endif %}
 </div>
 {% if not noform %}{{ m.enquiry(site, compact=True, idp='h', area=area or '', service=service or '') }}{% endif %}
 </div></section>

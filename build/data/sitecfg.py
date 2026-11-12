@@ -205,6 +205,7 @@ GUIDES = [
  {"slug": "gutter-cleaning-cost", "name": "Gutter cleaning cost and price estimator", "short": "Typical price bands for each property type, add-ons, and a quick estimate."},
  {"slug": "how-often-clean-gutters", "name": "How often should gutters be cleaned?", "short": "Frequency by tree type and roof, with local timing."},
  {"slug": "signs-gutters-need-cleaning", "name": "Signs your gutters need cleaning", "short": "What to look for from the ground before damage starts."},
+ {"slug": "gutter-guards-do-they-work", "name": "Do gutter guards work?", "short": "Micro-mesh, brush, foam and covers compared for local trees."},
  {"slug": "pine-needles-in-gutters", "name": "Pine needles in gutters", "short": "Why needles are the hardest local debris and what to do about them."},
  {"slug": "cast-iron-gutters", "name": "Cast iron gutters on period homes", "short": "Care, repair and consent for older properties."},
  {"slug": "skyvac-gutter-cleaning", "name": "Gutter vacuums explained", "short": "How ground-level vacuum cleaning works and when ladders are still needed."},

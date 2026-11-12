@@ -20,7 +20,7 @@ from proof import JOBS, REVIEWS  # noqa: E402
 env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=True, trim_blocks=True, lstrip_blocks=True)
 CSS = re.sub(r"\s*\n\s*", "", (ROOT / "templates" / "style.css").read_text())
 ORG_ID = SITE["domain"] + "/#org"
-PAGES = []  # (path, priority)
+PAGES = []  # (path, priority, lastmod)
 
 
 def md(text, fmt=None):
@@ -59,7 +59,7 @@ def write(path, template, priority=0.7, noindex=False, **ctx):
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(html)
     if not noindex:
-        PAGES.append((path, priority))
+        PAGES.append((path, priority, ctx.get("lastmod") or SITE["updated_iso"]))
 
 
 COMMON_FAQS = [
@@ -162,8 +162,9 @@ Send the postcodes and property types in the enquiry form, or email a list. You'
     for slug, g in GUIDE_BODIES.items():
         path = f"/advice/{slug}/"
         write(path, "page.html", 0.7, title=f"{g['title']} | The Gutter Team", desc=g["desc"], h1=g["h1"], lead=g["lead"], updated=True,
+              lastmod=g.get("updated_iso"), updated_txt=g.get("updated_txt"),
               crumbs=[["Advice", "/advice/"], [g["h1"], ""]], body=md(g["body"], fmt), og_type="article",
-              schema=[ld({"@context": "https://schema.org", "@type": "Article", "headline": g["h1"], "description": g["desc"], "dateModified": SITE["updated_iso"],
+              schema=[ld({"@context": "https://schema.org", "@type": "Article", "headline": g["h1"], "description": g["desc"], "dateModified": g.get("updated_iso") or SITE["updated_iso"],
                           "author": {"@id": ORG_ID}, "publisher": {"@id": ORG_ID}, "mainEntityOfPage": SITE["domain"] + path}),
                       ld(breadcrumbs([["Home", "/"], ["Advice", "/advice/"], [g["h1"], path]]))])
 
@@ -345,7 +346,7 @@ This website is operated by {SITE['operator']}, trading as {SITE['name']}. Price
 
 def finish():
     # sitemap
-    urls = "".join(f'<url><loc>{SITE["domain"]}{p}</loc><lastmod>{SITE["updated_iso"]}</lastmod><priority>{pr:.1f}</priority></url>' for p, pr in PAGES if p != "/404.html")
+    urls = "".join(f'<url><loc>{SITE["domain"]}{p}</loc><lastmod>{lm}</lastmod><priority>{pr:.1f}</priority></url>' for p, pr, lm in PAGES if p != "/404.html")
     (OUT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
     (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /thank-you/\n\nSitemap: {SITE['domain']}/sitemap.xml\n")
     (OUT / f"{SITE['indexnow_key']}.txt").write_text(SITE["indexnow_key"])
