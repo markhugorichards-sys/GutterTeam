@@ -10,6 +10,11 @@
       "source": "/index.html",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/areas/farnborough",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "headers": [

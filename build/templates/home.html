@@ -41,9 +41,31 @@
 </div>
 </div></section>
 
+<section class="band" id="farnborough"><div class="wrap grid2">
+<div class="prose">
+<h2>Gutter cleaning across Farnborough</h2>
+<p>{{ fb.intro }}</p>
+<h3>Neighbourhoods covered</h3>
+<div class="micro">{% for n, d in fb.micro %}<div><strong>{{ n }}</strong><br>{{ d }}</div>{% endfor %}</div>
+</div>
+<div class="prose">
+<h2>Farnborough homes and their gutters</h2>
+{% for era, d in fb.housing %}<h3>{{ era }}</h3><p>{{ d }}</p>{% endfor %}
+<h3>Trees and water</h3>
+<p>{{ fb.trees }}</p>
+{% if fb.water %}<p>{{ fb.water }}</p>{% endif %}
+<h3>Problems we see most in Farnborough</h3>
+<ul>{% for i in fb.issues %}<li>{{ i }}</li>{% endfor %}</ul>
+<div class="note"><strong>Best time to book in Farnborough:</strong> {{ fb.timing }}</div>
+<p class="small">{{ fb.price_note }} See the <a href="/advice/gutter-cleaning-cost/">price guide</a>.</p>
+<h3>Sources for the Farnborough facts</h3>
+{{ m.sources(fb.sources) }}
+</div>
+</div></section>
+
 <section class="band"><div class="wrap">
 <div class="sec-head"><h2>Areas covered</h2><p>Each town page explains what local roofs and trees mean for your gutters, from pine needles in Camberley to cast iron in Farnham.</p></div>
-<div class="areas-list">{% for a in areas %}<a href="/areas/{{ a.slug }}/">{{ a.name }}</a>{% endfor %}</div>
+<div class="areas-list">{% for a in areas %}{% if a.slug != 'farnborough' %}<a href="/areas/{{ a.slug }}/">{{ a.name }}</a>{% endif %}{% endfor %}</div>
 </div></section>
 
 <section class="band alt"><div class="wrap grid2">

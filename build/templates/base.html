@@ -43,7 +43,7 @@
 <div class="fgrid">
 <div><h3>The Gutter Team</h3><p>Gutter cleaning, repairs and downpipe clearing across {{ site.region }}. Enquiries are handled by email and passed to one vetted local gutter specialist covering your area.</p><p style="margin-top:10px"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p></div>
 <div><h3>Services</h3><ul>{% for s in services %}<li><a href="/services/{{ s.slug }}/">{{ s.name }}</a></li>{% endfor %}<li><a href="/landlords/">Landlords and agents</a></li></ul></div>
-<div><h3>Areas</h3><ul>{% for a in areas[:8] %}<li><a href="/areas/{{ a.slug }}/">{{ a.name }}</a></li>{% endfor %}<li><a href="/areas/">All areas</a></li></ul></div>
+<div><h3>Areas</h3><ul>{% for a in areas[:8] %}<li><a href="{% if a.slug == 'farnborough' %}/{% else %}/areas/{{ a.slug }}/{% endif %}">{{ a.name }}</a></li>{% endfor %}<li><a href="/areas/">All areas</a></li></ul></div>
 <div><h3>Advice</h3><ul><li><a href="/advice/gutter-cleaning-cost/">Prices and estimator</a></li><li><a href="/advice/how-often-clean-gutters/">How often to clean</a></li><li><a href="/advice/gutter-cleaning-statistics-uk/">Data and statistics</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></div>
 </div>
 <div class="legal">&copy; 2026 {{ site.operator }}, trading as {{ site.name }}. <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a></div>

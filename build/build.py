@@ -78,11 +78,13 @@ def build():
         shutil.rmtree(OUT)
     shutil.copytree(ROOT / "static", OUT)
 
-    # Home
+    # Home (also the single Farnborough page; /areas/farnborough/ 301s here)
+    FB = next(a for a in AREAS if a["slug"] == "farnborough")
+    home_faqs = HOME_FAQS + FB["faqs"]
     write("/", "home.html", 1.0, title="Gutter Cleaning Farnborough, Fleet & Camberley | The Gutter Team",
           desc="Gutter cleaning, downpipe unblocking and gutter repairs in Farnborough, Fleet, Camberley, Farnham and nearby. Typical prices published, price confirmed by email, photos every visit.",
-          faqs=HOME_FAQS, jobs=JOBS,
-          schema=[ld(ORG), ld({"@context": "https://schema.org", "@type": "WebSite", "name": SITE["name"], "url": SITE["domain"] + "/", "publisher": {"@id": ORG_ID}}), ld(faq_ld(HOME_FAQS))])
+          faqs=home_faqs, jobs=JOBS, fb=FB,
+          schema=[ld(ORG), ld({"@context": "https://schema.org", "@type": "WebSite", "name": SITE["name"], "url": SITE["domain"] + "/", "publisher": {"@id": ORG_ID}}), ld(faq_ld(home_faqs))])
 
     # Services
     svc_cards = "".join(f'<a class="card" href="/services/{s["slug"]}/"><h3>{s["name"]}</h3><p>{s["short"]}</p><span class="more">Read more</span></a>' for s in SERVICES)
@@ -126,13 +128,15 @@ Send the postcodes and property types in the enquiry form, or email a list. You'
 
     # Areas
     by_slug = {a["slug"]: a for a in AREAS}
-    area_cards = "".join(f'<a class="card" href="/areas/{a["slug"]}/"><h3>{a["name"]}</h3><p>{", ".join(a["postcodes"])} &middot; {a["county"]}</p><p style="margin-top:6px">{", ".join(n for n, _ in a["micro"][:3])}</p><span class="more">Gutter cleaning in {a["name"]}</span></a>' for a in AREAS)
+    area_cards = "".join(f'<a class="card" href="{"/" if a["slug"] == "farnborough" else "/areas/" + a["slug"] + "/"}"><h3>{a["name"]}</h3><p>{", ".join(a["postcodes"])} &middot; {a["county"]}</p><p style="margin-top:6px">{", ".join(n for n, _ in a["micro"][:3])}</p><span class="more">Gutter cleaning in {a["name"]}</span></a>' for a in AREAS)
     write("/areas/", "page.html", 0.9, title="Areas Covered: Gutter Cleaning in Hampshire, Surrey and Berkshire | The Gutter Team",
           desc="Gutter cleaning across Farnborough, Cove, Aldershot, Ash Vale, Fleet, Church Crookham, Camberley, Frimley, Farnham, Yateley, Sandhurst, Blackwater, Hartley Wintney and Hook.",
           h1="Areas covered", lead="14 towns across north-east Hampshire, west Surrey and south Berkshire. Each page explains what local roofs and trees mean for your gutters.",
           crumbs=[["Areas", ""]], body="", extra=f'<div class="grid3">{area_cards}</div>',
           schema=[ld(breadcrumbs([["Home", "/"], ["Areas", "/areas/"]]))])
     for a in AREAS:
+        if a["slug"] == "farnborough":
+            continue
         path = f"/areas/{a['slug']}/"
         faqs = a["faqs"] + COMMON_FAQS
         jobs = [j for j in JOBS if j["area"] == a["slug"]]
@@ -353,7 +357,7 @@ def finish():
     lines = [f"# {SITE['name']}", "", f"> Gutter cleaning, downpipe unblocking and gutter repairs across {SITE['region']}. Enquiries by email go to one vetted local gutter specialist per area. Typical prices are published and confirmed before booking.", "",
              "## Prices", f"- [Gutter cleaning cost and estimator]({SITE['domain']}/advice/gutter-cleaning-cost/): " + "; ".join(f"{b['label']} £{b['low']}-£{b['high']}" for b in PRICE_BANDS), "",
              "## Services"] + [f"- [{s['name']}]({SITE['domain']}/services/{s['slug']}/): {s['short']}" for s in SERVICES] + ["", "## Areas"] + \
-            [f"- [{a['name']}]({SITE['domain']}/areas/{a['slug']}/): {', '.join(a['postcodes'])}, {a['county']}" for a in AREAS] + ["", "## Guides"] + \
+            [f"- [{a['name']}]({SITE['domain']}{'/' if a['slug'] == 'farnborough' else '/areas/' + a['slug'] + '/'}): {', '.join(a['postcodes'])}, {a['county']}" for a in AREAS] + ["", "## Guides"] + \
             [f"- [{g['name']}]({SITE['domain']}/advice/{g['slug']}/)" for g in GUIDES] + ["", f"Contact: {SITE['email']}"]
     (OUT / "llms.txt").write_text("\n".join(lines) + "\n")
     # Area sheet export (the "Google Sheet" of locations)
@@ -361,7 +365,7 @@ def finish():
         w = csv.writer(f); w.writerow(["area", "url", "county", "council", "postcodes", "micro_location", "micro_notes", "housing_eras", "trees", "water", "best_time", "sources"])
         for a in AREAS:
             for n, d in a["micro"]:
-                w.writerow([a["name"], f"{SITE['domain']}/areas/{a['slug']}/", a["county"], a["council"], " ".join(a["postcodes"]), n, d,
+                w.writerow([a["name"], SITE['domain'] + ("/" if a["slug"] == "farnborough" else f"/areas/{a['slug']}/"), a["county"], a["council"], " ".join(a["postcodes"]), n, d,
                             "; ".join(e for e, _ in a["housing"]), a["trees"], a["water"], a["timing"], " | ".join(u for _, u in a["sources"])])
     print(f"Built {len(PAGES)} indexable pages into {OUT}")
 

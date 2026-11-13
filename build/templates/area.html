@@ -60,7 +60,7 @@
 <div><div class="sec-head"><h2>{{ a.name }} questions</h2></div>{{ m.faq(a.faqs + common_faqs) }}</div>
 <div class="prose">
 <h2>Nearby areas</h2>
-<div class="areas-list" style="margin-bottom:24px">{% for n in nearby %}<a href="/areas/{{ n.slug }}/">{{ n.name }}</a>{% endfor %}</div>
+<div class="areas-list" style="margin-bottom:24px">{% for n in nearby %}<a href="{% if n.slug == 'farnborough' %}/{% else %}/areas/{{ n.slug }}/{% endif %}">{{ n.name }}</a>{% endfor %}</div>
 <h2>Sources for this page</h2>
 <p class="small">Local facts on this page come from council character studies and other published sources. Updated {{ site.updated }}.</p>
 {{ m.sources(a.sources) }}
