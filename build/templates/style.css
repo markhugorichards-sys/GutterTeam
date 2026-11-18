@@ -3,7 +3,7 @@
 @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/inter-latin-600-normal.woff2) format('woff2')}
 :root{--ink:#0f1e33;--ink2:#162b45;--navy:#1d3557;--teal:#1f7a70;--teal2:#16645c;--tealbg:#e8f4f2;--text:#1f2933;--mid:#4a5563;--line:#dde2e8;--off:#f6f7f9;--w:#fff;--r:6px}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%}
 body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--text);background:var(--w);line-height:1.65;font-size:1rem}
 img{max-width:100%;height:auto;display:block}
 a{color:var(--teal2)}
@@ -41,7 +41,7 @@ h1,h2,h3{font-family:'EB Garamond',Georgia,serif;font-weight:600;line-height:1.1
 form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:480px){form .row{grid-template-columns:1fr}}
 label{display:block;font-size:.82rem;font-weight:600;margin-bottom:4px;color:var(--text)}
-input,select,textarea{width:100%;font:inherit;font-size:.95rem;padding:11px 12px;border:1px solid #b8c1cc;border-radius:var(--r);background:#fff;color:var(--text);margin-bottom:12px}
+input,select,textarea{width:100%;font:inherit;font-size:max(1rem,1em);padding:11px 12px;border:1px solid #b8c1cc;border-radius:var(--r);background:#fff;color:var(--text);margin-bottom:12px}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--teal);outline-offset:1px;border-color:var(--teal)}
 textarea{min-height:96px;resize:vertical}
 .consent{display:flex;gap:10px;align-items:flex-start;font-size:.8rem;color:var(--mid);margin:4px 0 14px;font-weight:400}
@@ -128,3 +128,6 @@ footer.site a:hover{color:#fff;text-decoration:underline}
 .quote p{font-style:italic;color:var(--text)}
 .quote footer{margin-top:10px;font-size:.85rem;color:var(--mid)}
 footer.site p a{text-decoration:underline}.legal a{text-decoration:underline!important}
+
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+:where(a,button,summary,[tabindex]):focus-visible{outline:2px solid currentColor;outline-offset:3px}
