@@ -82,7 +82,7 @@ def build():
     FB = next(a for a in AREAS if a["slug"] == "farnborough")
     home_faqs = HOME_FAQS + FB["faqs"]
     write("/", "home.html", 1.0, title="Gutter Cleaning Farnborough, Fleet & Camberley | The Gutter Team",
-          desc="Gutter cleaning, downpipe unblocking and gutter repairs in Farnborough, Fleet, Camberley, Farnham and nearby. Typical prices published, price confirmed by email, photos every visit.",
+          desc="Gutter cleaning, downpipe unblocking and repairs in Farnborough, Fleet, Camberley and Farnham. Typical prices published, confirmed by email.",
           faqs=home_faqs, jobs=JOBS, fb=FB,
           schema=[ld(ORG), ld({"@context": "https://schema.org", "@type": "WebSite", "name": SITE["name"], "url": SITE["domain"] + "/", "publisher": {"@id": ORG_ID}}), ld(faq_ld(home_faqs))])
 
