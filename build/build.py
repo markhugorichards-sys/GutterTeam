@@ -339,7 +339,7 @@ PRIVACY = f"""
 
 **How long we keep it.** Enquiries are kept for up to 24 months, then deleted, unless you become a customer, in which case records are kept as long as needed for accounting and legal purposes.
 
-**Analytics and cookies.** This site doesn't set advertising or tracking cookies.
+**Analytics and cookies.** This site doesn't set advertising or tracking cookies. We also use Microsoft Clarity, set to use no cookies, to see anonymised records of how pages are used, such as clicks and scrolling, so we can improve the site. Anything typed into forms is masked and never collected by Clarity.
 
 **Your rights.** You can ask to see, correct or delete your data, or object to its use, by emailing us. You can also complain to the Information Commissioner's Office at ico.org.uk.
 """
