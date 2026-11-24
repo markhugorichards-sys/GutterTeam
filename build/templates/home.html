@@ -2,21 +2,21 @@
 {% block main %}
 <section class="hero"><div class="wrap hero-grid">
 <div>
-<p class="eyebrow">Farnborough, Fleet, Camberley, Farnham and nearby</p>
-<h1>Gutter cleaning in Farnborough and the surrounding towns, priced up front</h1>
-<p class="lead">Overflowing gutters, a blocked downpipe or a dripping joint? Tell us about your home and get a price by email from a vetted local gutter specialist. Every visit comes with before and after photos.</p>
+<p class="eyebrow">Farnborough GU14 &middot; Hampshire</p>
+<h1>Gutter cleaning in Farnborough, priced up front</h1>
+<p class="lead">Gutter cleaning in Farnborough typically costs &pound;{{ semi.low }} to &pound;{{ semi.high }} for a semi-detached house and &pound;{{ det.low }} to &pound;{{ det.high }} for a detached house. Tell us about your home and one vetted local gutter specialist replies by email with a confirmed price. Every visit comes with before and after photos.</p>
 <ul class="ticks">
 <li>Typical prices published openly, from &pound;60 for a bungalow</li>
 <li>Price confirmed by email before anything is booked</li>
 <li>Before and after photos of every gutter run</li>
-<li>14 towns covered across Hampshire, Surrey and Berkshire</li>
+<li>All of Farnborough, plus 13 nearby towns in Hampshire, Surrey and Berkshire</li>
 </ul>
 </div>
 {{ m.enquiry(site, compact=True, idp='h') }}
 </div></section>
 
 <section class="band"><div class="wrap">
-<div class="sec-head"><h2>What gutter cleaning costs locally</h2><p>Most people want to know the price before they ask. These are typical bands for a standard clean with downpipe check. Your exact price depends on access, height and how much has built up, and it's confirmed before booking.</p></div>
+<div class="sec-head"><h2>How much does gutter cleaning cost in Farnborough?</h2><p>Most people want to know the price before they ask. These are typical bands for a standard clean with downpipe check. Your exact price depends on access, height and how much has built up, and it's confirmed before booking.</p></div>
 <div class="grid2"><div>{{ m.price_table(bands) }}</div>
 <div class="card"><h3>Get a closer estimate</h3><p>Add conservatories, extensions, a fascia wash or years of build-up, and see the likely range for your home in a few seconds.</p><p style="margin-top:14px"><a class="btn" href="/advice/gutter-cleaning-cost/">Open the price estimator</a></p><p class="small">Bands compiled from published 2026 UK price guides, with the South East uplift they describe. They're estimates, not quotes.</p></div></div>
 </div></section>
@@ -33,7 +33,7 @@
 </div></section>
 
 <section class="band dark"><div class="wrap">
-<div class="sec-head"><h2>How it works</h2><p>Three steps, all by email. No sales calls.</p></div>
+<div class="sec-head"><h2>How does it work?</h2><p>Three steps, all by email. No sales calls.</p></div>
 <div class="grid3 steps">
 <div class="step"><h3 style="color:#fff">Tell us about your home</h3><p>Postcode, property type and what's wrong. Add a photo description if you can.</p></div>
 <div class="step"><h3 style="color:#fff">Get a confirmed price</h3><p>Your enquiry goes to one vetted gutter specialist covering your area, who replies with a price and available dates.</p></div>
@@ -43,13 +43,12 @@
 
 <section class="band" id="farnborough"><div class="wrap grid2">
 <div class="prose">
-<h2>Gutter cleaning across Farnborough</h2>
+<h2>Which parts of Farnborough are covered?</h2>
 <p>{{ fb.intro }}</p>
-<h3>Neighbourhoods covered</h3>
 <div class="micro">{% for n, d in fb.micro %}<div><strong>{{ n }}</strong><br>{{ d }}</div>{% endfor %}</div>
 </div>
 <div class="prose">
-<h2>Farnborough homes and their gutters</h2>
+<h2>What do Farnborough homes mean for their gutters?</h2>
 {% for era, d in fb.housing %}<h3>{{ era }}</h3><p>{{ d }}</p>{% endfor %}
 <h3>Trees and water</h3>
 <p>{{ fb.trees }}</p>
@@ -64,7 +63,7 @@
 </div></section>
 
 <section class="band"><div class="wrap">
-<div class="sec-head"><h2>Areas covered</h2><p>Each town page explains what local roofs and trees mean for your gutters, from pine needles in Camberley to cast iron in Farnham.</p></div>
+<div class="sec-head"><h2>Gutter cleaning near Farnborough</h2><p>Each town page explains what local roofs and trees mean for your gutters, from pine needles in Camberley to cast iron in Farnham.</p></div>
 <div class="areas-list">{% for a in areas %}{% if a.slug != 'farnborough' %}<a href="/areas/{{ a.slug }}/">{{ a.name }}</a>{% endif %}{% endfor %}</div>
 </div></section>
 

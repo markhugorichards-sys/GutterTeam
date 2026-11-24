@@ -9,8 +9,8 @@ SITE = {
     # profile is verified. /review then forwards straight to it.
     "google_review_url": "",
     "operator": "HHR Holdings Ltd",
-    "updated": "27 October 2026",
-    "updated_iso": "2026-10-27",
+    "updated": "24 November 2026",
+    "updated_iso": "2026-11-24",
 }
 
 # Typical market price bands (GBP, per visit, standard clear and downpipe check).
@@ -40,8 +40,8 @@ PRICE_SOURCES = [
 SERVICES = [
  {
   "slug": "gutter-cleaning", "name": "Gutter Cleaning", "short": "Full clearance of every gutter run, outlets checked, and photos before and after.",
-  "title": "Gutter Cleaning in Farnborough, Fleet and Camberley",
-  "desc": "Professional gutter cleaning across Farnborough, Fleet, Camberley, Farnham and nearby towns. Every run cleared, downpipes checked, and photos sent after the visit.",
+  "title": "Gutter Cleaning Service: What's Included, Methods and How Often",
+  "desc": "What a professional gutter clean includes: every run cleared, downpipes checked, vacuum or ladder access explained, and before and after photos on the day.",
   "lead": "Every gutter run on the property is cleared, including the short runs on bays, porches, extensions and dormers that are easy to miss. Outlets and downpipes are checked for flow, and you get photos so you can see the result without climbing a ladder.",
   "body": """
 ## What a standard clean includes
@@ -99,7 +99,7 @@ The blockage is located, cleared with rods or a jetting attachment, and the pipe
  {
   "slug": "gutter-repairs", "name": "Gutter Repairs", "short": "Leaking joints resealed, brackets replaced, sagging runs realigned.",
   "title": "Gutter Repairs: Leaking Joints, Brackets and Sagging Gutters",
-  "desc": "Gutter repairs across Farnborough, Fleet, Camberley and Farnham: leaking joints resealed, brackets replaced and sagging runs realigned. Priced before work starts.",
+  "desc": "Gutter repairs in Farnborough, Fleet, Camberley and Farnham: leaking joints resealed, brackets replaced and sagging runs realigned. Priced before work starts.",
   "lead": "Most gutter problems are small and cheap to fix if caught early: a dripping joint, a slipped bracket, a run that has lost its fall. Repairs are priced from photos where possible, and nothing is done without your agreement.",
   "body": """
 ## Common repairs
@@ -123,6 +123,58 @@ Like-for-like repairs don't change the appearance of a building. Changing materi
   "faqs": [
    ["Repair or replace?", "If the run is straight and the brackets are sound, resealing and part replacement costs far less than a new system. Full replacement makes sense when the plastic has gone brittle or several sections are failing."],
    ["Can a repair be priced from photos?", "Often, yes. Attach a description in the enquiry form and the reply will say whether photos are enough or a look in person is needed."],
+  ],
+ },
+ {
+  "slug": "gutter-replacement", "name": "Gutter Replacement", "short": "New uPVC, cast iron or aluminium gutters and downpipes, including concrete gutter conversions.",
+  "title": "Gutter Replacement: Costs per Metre, Materials and Concrete Gutters",
+  "desc": "Gutter replacement in Farnborough, Fleet, Camberley and Farnham: uPVC, cast iron and aluminium costs per metre, concrete gutters, and when repair is enough.",
+  "lead": "New uPVC guttering is typically priced at about £20 to £50 per metre supplied and fitted, depending on the guide, and published figures for a whole semi-detached house run from about £400 to £900. Replacement makes sense when several sections are brittle, leaking or the wrong size for the roof. Where only a joint or bracket has failed, a repair costs far less.",
+  "body": """
+## How much does gutter replacement cost?
+
+| Material | Typical supply and fit, per metre |
+|---|---|
+| uPVC (plastic) | £20 to £50 |
+| Aluminium | £50 to £78 |
+| Cast iron | £50 to £85, and up to £150 for heritage profiles |
+| Replacement uPVC downpipe | £35 to £45 |
+
+Whole-house totals for uPVC run from about £400 to £900 on a typical semi, and published UK averages for all materials sit around £1,000 to £1,600. These are market estimates from the guides listed below, not quotes. Your price is confirmed by email before anything is booked.
+
+## When is replacement better than repair?
+
+- **Repair** if the run is straight, the brackets are sound and the leak is at one or two joints. Resealing a joint or fitting a new bracket is a small job.
+- **Replace** if the plastic has gone brittle or faded, several joints leak at once, the gutter has lost its fall along the whole run, or the profile is too small for the roof and overflows in heavy rain.
+
+See [gutter repairs](/services/gutter-repairs/) for the smaller jobs.
+
+## Which material suits your house?
+
+- **uPVC** suits most post-war houses and is the cheapest to buy and maintain.
+- **Cast iron** is common on listed buildings and older houses in conservation areas, such as central Farnham. See the [cast iron gutters guide](/advice/cast-iron-gutters/).
+- **Aluminium** is lighter than cast iron, does not rust and is available in heritage-style profiles.
+
+## What about concrete gutters?
+
+Some 1950s and 1960s houses, including parts of Farnham and Aldershot, have concrete gutters cast as part of the eaves. They often leak at the joints and can let water into the wall below. The usual choices are relining the concrete gutter, or removing it and fitting a fascia board with standard guttering. Removal is the larger job: MyJobQuote puts the average concrete gutter replacement at about £2,400 in 2026.
+
+## Do I need permission to change my gutters?
+
+Like-for-like replacement does not normally need consent. Changing the material, colour or profile on a listed building, or on a front elevation covered by an Article 4 direction, may. Check with your council first. Each [area page](/areas/) lists the conservation areas in that town.
+""",
+  "sources": [
+   ["MyJobQuote: gutter replacement cost (2026)", "https://www.myjobquote.co.uk/costs/replace-guttering"],
+   ["Checkatrade: gutter replacement cost", "https://www.checkatrade.com/blog/cost-guides/gutter-replacement-cost"],
+   ["Pure Seal Services: guttering replacement price breakdown", "https://puresealservices.co.uk/how-much-should-guttering-cost-to-replace-in-the-uk-a-complete-price-breakdown/"],
+   ["less.co.uk: gutter replacement cost (2026)", "https://less.co.uk/home-improvements/guttering/replacement-cost"],
+   ["Bark: gutter installation and replacement prices", "https://www.bark.com/en/gb/gutter-installation-or-replacement/gutter-installation-replacement-prices"],
+   ["MyJobQuote: concrete gutter replacement cost (2026)", "https://www.myjobquote.co.uk/costs/concrete-gutter-replacement"],
+  ],
+  "faqs": [
+   ["How long does gutter replacement take?", "A typical house is usually done in a day. Larger houses, cast iron systems and concrete gutter conversions can take longer, and the timing is confirmed with your price."],
+   ["Can new gutters be fitted to old fascias?", "Only if the fascia boards are sound. Soft or rotten timber is pointed out before fitting, because new brackets will not hold in it."],
+   ["Is uPVC allowed on a period house?", "On most houses, yes. On a listed building, or a front elevation covered by an Article 4 direction, changing from cast iron to uPVC may need consent. Check with your council."],
   ],
  },
  {
@@ -155,7 +207,7 @@ Gutters are cleaned and any leaks fixed before guards go on. Fitting a guard ove
  {
   "slug": "fascia-soffit-cleaning", "name": "Fascia and Soffit Cleaning", "short": "uPVC fascias, soffits and gutter faces washed back to clean white.",
   "title": "Fascia and Soffit Cleaning",
-  "desc": "Fascia, soffit and gutter-face cleaning for uPVC rooflines across Farnborough, Fleet, Camberley and Farnham. Best booked with a gutter clean to save a second visit.",
+  "desc": "Fascia, soffit and gutter-face cleaning for uPVC rooflines in Farnborough, Fleet, Camberley and Farnham. Best booked with a gutter clean to save a visit.",
   "lead": "Green algae and black streaks on fascias and the outside face of gutters are cosmetic, but they make a house look neglected. A wash at the same visit as a gutter clean is the cheapest way to do it.",
   "body": """
 ## What's cleaned
@@ -179,7 +231,7 @@ Painted timber fascias that are flaking or soft need repair and redecoration, no
  {
   "slug": "annual-maintenance", "name": "Annual Maintenance Plans", "short": "Scheduled cleans each year, with a dated photo record.",
   "title": "Annual Gutter Maintenance Plans",
-  "desc": "Scheduled annual or twice-yearly gutter cleaning for homes, landlords and managing agents across Farnborough, Fleet, Camberley and Farnham, with a dated photo record.",
+  "desc": "Annual or twice-yearly gutter cleaning for homes, landlords and agents in Farnborough, Fleet, Camberley and Farnham, with a dated photo record.",
   "lead": "If your home is under trees or you manage several properties, a scheduled plan takes gutter cleaning off your to-do list. Visits are booked at the right time of year for the trees over each roof, and each visit leaves a dated photo record.",
   "body": """
 ## How a plan works

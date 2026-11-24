@@ -1,3 +1,5 @@
+# Markdown guide to this site: https://www.gutterteam.co.uk/llms.txt
+# Content map with Markdown answers: https://www.gutterteam.co.uk/sitemap.md
 User-agent: *
 Allow: /
 Disallow: /thank-you/

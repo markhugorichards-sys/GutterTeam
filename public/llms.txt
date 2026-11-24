@@ -2,41 +2,49 @@
 
 > Gutter cleaning, downpipe unblocking and gutter repairs across Farnborough, Fleet, Camberley, Farnham and the surrounding towns. Enquiries by email go to one vetted local gutter specialist per area. Typical prices are published and confirmed before booking.
 
+If you are an LLM looking for site information, use the [content map](https://www.gutterteam.co.uk/sitemap.md) to locate the relevant topic and its linked Markdown answer. Use that document's cited sources and canonical page; if the requested information is absent, report that gap.
+
 ## Prices
-- [Gutter cleaning cost and estimator](https://www.gutterteam.co.uk/advice/gutter-cleaning-cost/): Terraced house (2 storey) £65-£100; Semi-detached house (2 storey) £80-£125; Detached house (2 storey) £110-£190; Bungalow or chalet bungalow £60-£105; Three-storey house or town house £140-£250; Low-rise flats or maisonette block £150-£400
+- [Gutter cleaning cost and estimator](https://www.gutterteam.co.uk/advice/gutter-cleaning-cost/index.md): Terraced house (2 storey) £65-£100; Semi-detached house (2 storey) £80-£125; Detached house (2 storey) £110-£190; Bungalow or chalet bungalow £60-£105; Three-storey house or town house £140-£250; Low-rise flats or maisonette block £150-£400
 
 ## Services
-- [Gutter Cleaning](https://www.gutterteam.co.uk/services/gutter-cleaning/): Full clearance of every gutter run, outlets checked, and photos before and after.
-- [Downpipe Unblocking](https://www.gutterteam.co.uk/services/downpipe-unblocking/): Blocked downpipes cleared from the top or the shoe, then flow-tested.
-- [Gutter Repairs](https://www.gutterteam.co.uk/services/gutter-repairs/): Leaking joints resealed, brackets replaced, sagging runs realigned.
-- [Gutter Guards](https://www.gutterteam.co.uk/services/gutter-guards/): Brush, mesh or foam guards fitted where they genuinely reduce clearing.
-- [Fascia and Soffit Cleaning](https://www.gutterteam.co.uk/services/fascia-soffit-cleaning/): uPVC fascias, soffits and gutter faces washed back to clean white.
-- [Annual Maintenance Plans](https://www.gutterteam.co.uk/services/annual-maintenance/): Scheduled cleans each year, with a dated photo record.
+- [Gutter Cleaning](https://www.gutterteam.co.uk/services/gutter-cleaning/index.md): Full clearance of every gutter run, outlets checked, and photos before and after.
+- [Downpipe Unblocking](https://www.gutterteam.co.uk/services/downpipe-unblocking/index.md): Blocked downpipes cleared from the top or the shoe, then flow-tested.
+- [Gutter Repairs](https://www.gutterteam.co.uk/services/gutter-repairs/index.md): Leaking joints resealed, brackets replaced, sagging runs realigned.
+- [Gutter Replacement](https://www.gutterteam.co.uk/services/gutter-replacement/index.md): New uPVC, cast iron or aluminium gutters and downpipes, including concrete gutter conversions.
+- [Gutter Guards](https://www.gutterteam.co.uk/services/gutter-guards/index.md): Brush, mesh or foam guards fitted where they genuinely reduce clearing.
+- [Fascia and Soffit Cleaning](https://www.gutterteam.co.uk/services/fascia-soffit-cleaning/index.md): uPVC fascias, soffits and gutter faces washed back to clean white.
+- [Annual Maintenance Plans](https://www.gutterteam.co.uk/services/annual-maintenance/index.md): Scheduled cleans each year, with a dated photo record.
 
 ## Areas
-- [Farnborough](https://www.gutterteam.co.uk/): GU14, GU11, Hampshire
-- [Cove and Southwood](https://www.gutterteam.co.uk/areas/cove/): GU14, Hampshire
-- [Aldershot](https://www.gutterteam.co.uk/areas/aldershot/): GU11, GU12, Hampshire
-- [Ash and Ash Vale](https://www.gutterteam.co.uk/areas/ash-vale/): GU12, Surrey
-- [Fleet](https://www.gutterteam.co.uk/areas/fleet/): GU51, GU52, Hampshire
-- [Church Crookham](https://www.gutterteam.co.uk/areas/church-crookham/): GU52, Hampshire
-- [Camberley](https://www.gutterteam.co.uk/areas/camberley/): GU15, Surrey
-- [Frimley](https://www.gutterteam.co.uk/areas/frimley/): GU16, Surrey
-- [Farnham](https://www.gutterteam.co.uk/areas/farnham/): GU9, GU10, Surrey
-- [Yateley](https://www.gutterteam.co.uk/areas/yateley/): GU46, Hampshire
-- [Sandhurst](https://www.gutterteam.co.uk/areas/sandhurst/): GU47, Berkshire
-- [Blackwater and Hawley](https://www.gutterteam.co.uk/areas/blackwater/): GU17, Hampshire
-- [Hartley Wintney](https://www.gutterteam.co.uk/areas/hartley-wintney/): RG27, Hampshire
-- [Hook](https://www.gutterteam.co.uk/areas/hook/): RG27, Hampshire
+- [Farnborough](https://www.gutterteam.co.uk/index.md): GU14, GU11, Hampshire
+- [Cove and Southwood](https://www.gutterteam.co.uk/areas/cove/index.md): GU14, Hampshire
+- [Aldershot](https://www.gutterteam.co.uk/areas/aldershot/index.md): GU11, GU12, Hampshire
+- [Ash and Ash Vale](https://www.gutterteam.co.uk/areas/ash-vale/index.md): GU12, Surrey
+- [Fleet](https://www.gutterteam.co.uk/areas/fleet/index.md): GU51, GU52, Hampshire
+- [Church Crookham](https://www.gutterteam.co.uk/areas/church-crookham/index.md): GU52, Hampshire
+- [Camberley](https://www.gutterteam.co.uk/areas/camberley/index.md): GU15, Surrey
+- [Frimley](https://www.gutterteam.co.uk/areas/frimley/index.md): GU16, Surrey
+- [Farnham](https://www.gutterteam.co.uk/areas/farnham/index.md): GU9, GU10, Surrey
+- [Yateley](https://www.gutterteam.co.uk/areas/yateley/index.md): GU46, Hampshire
+- [Sandhurst](https://www.gutterteam.co.uk/areas/sandhurst/index.md): GU47, Berkshire
+- [Blackwater and Hawley](https://www.gutterteam.co.uk/areas/blackwater/index.md): GU17, Hampshire
+- [Hartley Wintney](https://www.gutterteam.co.uk/areas/hartley-wintney/index.md): RG27, Hampshire
+- [Hook](https://www.gutterteam.co.uk/areas/hook/index.md): RG27, Hampshire
 
 ## Guides
-- [Gutter cleaning cost and price estimator](https://www.gutterteam.co.uk/advice/gutter-cleaning-cost/)
-- [How often should gutters be cleaned?](https://www.gutterteam.co.uk/advice/how-often-clean-gutters/)
-- [Signs your gutters need cleaning](https://www.gutterteam.co.uk/advice/signs-gutters-need-cleaning/)
-- [Do gutter guards work?](https://www.gutterteam.co.uk/advice/gutter-guards-do-they-work/)
-- [Pine needles in gutters](https://www.gutterteam.co.uk/advice/pine-needles-in-gutters/)
-- [Cast iron gutters on period homes](https://www.gutterteam.co.uk/advice/cast-iron-gutters/)
-- [Gutter vacuums explained](https://www.gutterteam.co.uk/advice/skyvac-gutter-cleaning/)
-- [Gutter cleaning data and local housing facts](https://www.gutterteam.co.uk/advice/gutter-cleaning-statistics-uk/)
+- [Gutter cleaning cost and price estimator](https://www.gutterteam.co.uk/advice/gutter-cleaning-cost/index.md): Typical price bands for each property type, add-ons, and a quick estimate.
+- [How often should gutters be cleaned?](https://www.gutterteam.co.uk/advice/how-often-clean-gutters/index.md): Frequency by tree type and roof, with local timing.
+- [Signs your gutters need cleaning](https://www.gutterteam.co.uk/advice/signs-gutters-need-cleaning/index.md): What to look for from the ground before damage starts.
+- [Do gutter guards work?](https://www.gutterteam.co.uk/advice/gutter-guards-do-they-work/index.md): Micro-mesh, brush, foam and covers compared for local trees.
+- [Pine needles in gutters](https://www.gutterteam.co.uk/advice/pine-needles-in-gutters/index.md): Why needles are the hardest local debris and what to do about them.
+- [Cast iron gutters on period homes](https://www.gutterteam.co.uk/advice/cast-iron-gutters/index.md): Care, repair and consent for older properties.
+- [Gutter vacuums explained](https://www.gutterteam.co.uk/advice/skyvac-gutter-cleaning/index.md): How ground-level vacuum cleaning works and when ladders are still needed.
+- [Gutter cleaning data and local housing facts](https://www.gutterteam.co.uk/advice/gutter-cleaning-statistics-uk/index.md): Sourced figures on costs, rainfall, damage and local housing stock.
 
-Contact: hello@gutterteam.co.uk
+## Optional
+- [Landlords and agents](https://www.gutterteam.co.uk/landlords/index.md)
+- [About](https://www.gutterteam.co.uk/about/index.md)
+- [Statistics CSV](https://www.gutterteam.co.uk/data/gutter-statistics.csv)
+
+Contact: hello@gutterteam.co.uk (email only, no phone line).

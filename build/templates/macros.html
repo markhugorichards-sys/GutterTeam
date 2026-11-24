@@ -19,7 +19,7 @@
 <option value="">Choose one</option><option>Terraced house</option><option>Semi-detached house</option><option>Detached house</option><option>Bungalow or chalet bungalow</option><option>Three-storey house</option><option>Flats or maisonettes</option><option>Commercial</option></select></div>
 </div>
 <div class="row">
-<div><label for="{{ idp }}-svc">Service needed</label><select id="{{ idp }}-svc" name="service" required><option value="">Choose one</option>{% for o in ['Gutter cleaning','Downpipe unblocking','Gutter repairs','Gutter guards','Fascia and soffit cleaning','Annual maintenance plan','Not sure'] %}<option{% if o|lower == service|lower %} selected{% endif %}>{{ o }}</option>{% endfor %}</select></div>
+<div><label for="{{ idp }}-svc">Service needed</label><select id="{{ idp }}-svc" name="service" required><option value="">Choose one</option>{% for o in ['Gutter cleaning','Downpipe unblocking','Gutter repairs','Gutter replacement','Gutter guards','Fascia and soffit cleaning','Annual maintenance plan','Not sure'] %}<option{% if o|lower == service|lower %} selected{% endif %}>{{ o }}</option>{% endfor %}</select></div>
 <div><label for="{{ idp }}-when">When?</label><select id="{{ idp }}-when" name="timing"><option>Overflowing now</option><option>In the next 2 weeks</option><option>This month</option><option>Planning ahead</option></select></div>
 </div>
 {% if not compact %}

@@ -79,7 +79,7 @@ STATS = [
 GUIDE_BODIES = {
 "how-often-clean-gutters": {
  "title": "How Often Should Gutters Be Cleaned? Local Guide by Tree and Roof Type",
- "desc": "How often to clean gutters in Farnborough, Fleet, Camberley and Farnham: once or twice a year depending on oak, pine and horse chestnut cover, with the best months to book.",
+ "desc": "How often to clean gutters: once a year for most homes, twice under oak, pine or horse chestnut. Local timing for Farnborough, Fleet, Camberley and Farnham.",
  "h1": "How often should gutters be cleaned?",
  "lead": "Once a year suits most homes. Homes under trees usually need twice. The trees over your roof matter more than the house itself, and locally that means oak, horse chestnut and pine.",
  "body": """

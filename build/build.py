@@ -20,7 +20,14 @@ from proof import JOBS, REVIEWS  # noqa: E402
 env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=True, trim_blocks=True, lstrip_blocks=True)
 CSS = re.sub(r"\s*\n\s*", "", (ROOT / "templates" / "style.css").read_text())
 ORG_ID = SITE["domain"] + "/#org"
+SEMI = next(b for b in PRICE_BANDS if b["key"] == "semi")
+DET = next(b for b in PRICE_BANDS if b["key"] == "detached")
 PAGES = []  # (path, priority, lastmod)
+META = {}  # path -> title, desc, lastmod (for the Markdown corpus)
+
+
+def md_path(path):
+    return path + "index.md" if path.endswith("/") else path.rsplit(".", 1)[0] + ".md"
 
 
 def md(text, fmt=None):
@@ -51,6 +58,9 @@ ORG = {"@context": "https://schema.org", "@type": "Organization", "@id": ORG_ID,
 
 def write(path, template, priority=0.7, noindex=False, **ctx):
     ctx.setdefault("has_form", not ctx.get("noform"))
+    if len(ctx.get("title", "")) > 70 and ctx["title"].endswith(" | The Gutter Team"):
+        ctx["title"] = ctx["title"][: -len(" | The Gutter Team")]
+    ctx.setdefault("md_alt", None if noindex else md_path(path))
     html = env.get_template(template).render(
         site=SITE, css=CSS, path=path, noindex=noindex, services=SERVICES, areas=AREAS,
         guides=GUIDES, bands=PRICE_BANDS, **ctx)
@@ -60,6 +70,7 @@ def write(path, template, priority=0.7, noindex=False, **ctx):
     dest.write_text(html)
     if not noindex:
         PAGES.append((path, priority, ctx.get("lastmod") or SITE["updated_iso"]))
+        META[path] = {"title": ctx["title"], "desc": ctx["desc"], "lastmod": ctx.get("lastmod") or SITE["updated_iso"]}
 
 
 COMMON_FAQS = [
@@ -73,6 +84,26 @@ HOME_FAQS = [
 ] + COMMON_FAQS
 
 
+AREA_EXTRA = {
+    "farnham": """
+## Gutter repairs, replacement and concrete gutters in Farnham
+
+Farnham's listed Georgian core around Castle Street often has cast iron gutters and hoppers, while later houses mostly have uPVC. If your house was built in the 1950s or 1960s it may have concrete gutters cast into the eaves instead. Each needs a different approach.
+
+- **Cast iron.** Repairs are usually like-for-like. In the conservation area, changing to uPVC may need consent from Waverley Borough Council. See the [cast iron gutters guide](/advice/cast-iron-gutters/).
+- **Concrete gutters.** These are cast into the eaves and tend to leak at the joints. The options are relining, or removing them and fitting fascia boards with standard guttering. See [gutter replacement](/services/gutter-replacement/) for typical costs.
+- **uPVC.** Leaking joints and slipped brackets are usually a small [repair](/services/gutter-repairs/). Brittle, faded runs are better replaced.
+
+Ask for repairs, replacement or new guttering in the enquiry form and the price comes back by email.
+""",
+    "aldershot": """
+## Gutter repairs and replacement in Aldershot
+
+Period houses in Aldershot can still have cast iron gutters, which rust at the joints if left unpainted, and some houses of the 1950s and 1960s were built with concrete gutters cast into the eaves. A leaking joint is usually a small [repair](/services/gutter-repairs/). Where a run is brittle, sagging along its length or a concrete gutter is letting water into the wall, [gutter replacement](/services/gutter-replacement/) explains the options and typical costs per metre.
+""",
+}
+
+
 def build():
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -81,9 +112,9 @@ def build():
     # Home (also the single Farnborough page; /areas/farnborough/ 301s here)
     FB = next(a for a in AREAS if a["slug"] == "farnborough")
     home_faqs = HOME_FAQS + FB["faqs"]
-    write("/", "home.html", 1.0, title="Gutter Cleaning Farnborough, Fleet & Camberley | The Gutter Team",
-          desc="Gutter cleaning, downpipe unblocking and repairs in Farnborough, Fleet, Camberley and Farnham. Typical prices published, confirmed by email.",
-          faqs=home_faqs, jobs=JOBS, fb=FB,
+    write("/", "home.html", 1.0, title="Gutter Cleaning Farnborough GU14 | Local Prices | The Gutter Team",
+          desc="Gutter cleaning in Farnborough GU14: typically £80 to £125 for a semi. Downpipes unblocked, repairs priced, before and after photos. Price confirmed by email.",
+          faqs=home_faqs, jobs=JOBS, fb=FB, semi=SEMI, det=DET,
           schema=[ld(ORG), ld({"@context": "https://schema.org", "@type": "WebSite", "name": SITE["name"], "url": SITE["domain"] + "/", "publisher": {"@id": ORG_ID}}), ld(faq_ld(home_faqs))])
 
     # Services
@@ -97,7 +128,7 @@ def build():
         path = f"/services/{s['slug']}/"
         write(path, "page.html", 0.9 if s["slug"] == "gutter-cleaning" else 0.8, title=f"{s['title']} | The Gutter Team", desc=s["desc"],
               h1=s["name"], lead=s["lead"], crumbs=[["Services", "/services/"], [s["name"], ""]], body=md(s["body"]), faqs=s["faqs"] + COMMON_FAQS,
-              area=s["name"], service=s["name"].replace("Fascia and Soffit Cleaning","Fascia and soffit cleaning").replace("Annual Maintenance Plans","Annual maintenance plan"),
+              page_sources=s.get("sources"), area=s["name"], service=s["name"].replace("Fascia and Soffit Cleaning","Fascia and soffit cleaning").replace("Annual Maintenance Plans","Annual maintenance plan"),
               schema=[ld({"@context": "https://schema.org", "@type": "Service", "name": s["name"], "serviceType": s["name"], "description": s["desc"],
                           "provider": {"@id": ORG_ID}, "areaServed": [{"@type": "Place", "name": a["name"]} for a in AREAS], "url": SITE["domain"] + path}),
                       ld(breadcrumbs([["Home", "/"], ["Services", "/services/"], [s["name"], path]])), ld(faq_ld(s["faqs"] + COMMON_FAQS))])
@@ -130,7 +161,7 @@ Send the postcodes and property types in the enquiry form, or email a list. You'
     by_slug = {a["slug"]: a for a in AREAS}
     area_cards = "".join(f'<a class="card" href="{"/" if a["slug"] == "farnborough" else "/areas/" + a["slug"] + "/"}"><h3>{a["name"]}</h3><p>{", ".join(a["postcodes"])} &middot; {a["county"]}</p><p style="margin-top:6px">{", ".join(n for n, _ in a["micro"][:3])}</p><span class="more">Gutter cleaning in {a["name"]}</span></a>' for a in AREAS)
     write("/areas/", "page.html", 0.9, title="Areas Covered: Gutter Cleaning in Hampshire, Surrey and Berkshire | The Gutter Team",
-          desc="Gutter cleaning across Farnborough, Cove, Aldershot, Ash Vale, Fleet, Church Crookham, Camberley, Frimley, Farnham, Yateley, Sandhurst, Blackwater, Hartley Wintney and Hook.",
+          desc="Gutter cleaning in 14 towns: Farnborough, Aldershot, Fleet, Camberley, Frimley, Farnham, Yateley, Sandhurst, Hook and more. Local prices and guides for each.",
           h1="Areas covered", lead="14 towns across north-east Hampshire, west Surrey and south Berkshire. Each page explains what local roofs and trees mean for your gutters.",
           crumbs=[["Areas", ""]], body="", extra=f'<div class="grid3">{area_cards}</div>',
           schema=[ld(breadcrumbs([["Home", "/"], ["Areas", "/areas/"]]))])
@@ -139,12 +170,13 @@ Send the postcodes and property types in the enquiry form, or email a list. You'
             continue
         path = f"/areas/{a['slug']}/"
         faqs = a["faqs"] + COMMON_FAQS
+        a = dict(a, extra=md(AREA_EXTRA[a["slug"]]) if a["slug"] in AREA_EXTRA else "")
         jobs = [j for j in JOBS if j["area"] == a["slug"]]
         revs = [r for r in REVIEWS if r["area"] == a["slug"]]
         pc = " ".join(a["postcodes"])
-        write(path, "area.html", 0.8, title=f"Gutter Cleaning {a['name']} {pc} | Prices and Local Guide | The Gutter Team",
-              desc=f"Gutter cleaning in {a['name']} ({', '.join(a['postcodes'])}): typical local prices, what {a['name']} roofs and trees mean for your gutters, and a price by email. Photos every visit.",
-              a=a, faqs=faqs, common_faqs=COMMON_FAQS, jobs=jobs, reviews=revs, nearby=[by_slug[n] for n in a["nearby"]],
+        write(path, "area.html", 0.8, title=f"Gutter Cleaning {a['name']} {', '.join(a['postcodes'])} | Local Prices | The Gutter Team",
+              desc=f"Gutter cleaning in {a['name']} ({', '.join(a['postcodes'])}): typically £{SEMI['low']} to £{SEMI['high']} for a semi. Local roofs, trees and timing explained, and a price by email.",
+              a=a, semi=SEMI, det=DET, faqs=faqs, common_faqs=COMMON_FAQS, jobs=jobs, reviews=revs, nearby=[by_slug[n] for n in a["nearby"]],
               schema=[ld({"@context": "https://schema.org", "@type": "Service", "name": f"Gutter cleaning in {a['name']}", "serviceType": "Gutter cleaning",
                           "provider": {"@id": ORG_ID}, "url": SITE["domain"] + path,
                           "areaServed": {"@type": "Place", "name": a["name"], "address": {"@type": "PostalAddress", "addressLocality": a["name"], "addressRegion": a["county"], "addressCountry": "GB"},
@@ -277,7 +309,7 @@ Falls from height were the most common cause of fatal injury at work in Great Br
           h1="Gutter cleaning cost and price estimator", lead="Typical local prices by property type, what moves the price, and a quick estimator, all before you ask anyone for a quote.",
           crumbs=[["Advice", "/advice/"], ["Gutter cleaning cost", ""]], updated=True, body=est + body, faqs=faqs, page_sources=PRICE_SOURCES + [["HSE: fatal injuries 2024/25", HSE]],
           area="Price estimator",
-          schema=[ld({"@context": "https://schema.org", "@type": "Article", "headline": "Gutter cleaning cost and price estimator", "dateModified": SITE["updated_iso"],
+          schema=[ld({"@context": "https://schema.org", "@type": "Article", "headline": "Gutter cleaning cost and price estimator", "description": "Typical gutter cleaning prices by property type in Farnborough, Fleet, Camberley and Farnham, with an estimator.", "dateModified": SITE["updated_iso"],
                       "author": {"@id": ORG_ID}, "publisher": {"@id": ORG_ID}, "mainEntityOfPage": SITE["domain"] + path}),
                   ld(breadcrumbs([["Home", "/"], ["Advice", "/advice/"], ["Gutter cleaning cost", path]])), ld(faq_ld(faqs))])
 
@@ -315,7 +347,7 @@ def build_stats_page():
 <p>You're welcome to cite any figure on this page. Please credit the original source shown and link to this page as "The Gutter Team, gutter cleaning data and local housing facts". The compiled table is available under CC BY 4.0. Spotted an error or a newer figure? Email <a href="mailto:{SITE['email']}">{SITE['email']}</a>. Next review: January 2027.</p>
 """
     write(path, "page.html", 0.8, title=f"Gutter Cleaning Statistics UK 2026: {n} Sourced Figures and Local Data | The Gutter Team",
-          desc=f"{n} sourced figures on gutter cleaning costs, UK rainfall, work-at-height safety, housing stock age and local housing and trees across north-east Hampshire and west Surrey.",
+          desc=f"{n} sourced figures on gutter cleaning costs, UK rainfall, work-at-height safety and housing age, plus local data for north-east Hampshire and west Surrey.",
           h1="Gutter cleaning data and local housing facts", lead=f"{n} sourced figures on rainfall, costs, safety and housing, plus a local dataset for the 14 towns we cover. Free to cite.",
           crumbs=[["Advice", "/advice/"], ["Statistics", ""]], updated=True, body=body, page_sources=[list(x) for x in srcs], og_type="article",
           schema=[ld({"@context": "https://schema.org", "@type": "Dataset", "name": "Gutter cleaning data and local housing facts", "description": f"{n} sourced figures on gutter costs, rainfall, safety and housing for north-east Hampshire and west Surrey.",
@@ -348,17 +380,62 @@ This website is operated by {SITE['operator']}, trading as {SITE['name']}. Price
 """
 
 
+TOPICS = [("Home and Farnborough", lambda p: p == "/"), ("Services", lambda p: p.startswith("/services/") or p == "/landlords/"),
+          ("Areas", lambda p: p.startswith("/areas/")), ("Prices, guides and data", lambda p: p.startswith("/advice/")),
+          ("About and contact", lambda p: p in ("/about/", "/contact/", "/privacy/", "/terms/"))]
+
+
+def export_markdown():
+    """Write a Markdown equivalent of every indexable page from the same build, plus /sitemap.md."""
+    from bs4 import BeautifulSoup
+    from markdownify import markdownify
+    for path, _, lm in PAGES:
+        soup = BeautifulSoup((OUT / path.lstrip("/") / "index.html").read_text(), "html.parser")
+        main = soup.find("main")
+        for tag in main.select("form, script, style, svg, .panel, .cta-band, .crumbs, .est, img"):
+            tag.decompose()
+        for d in main.select(".areas-list"):
+            d.name = "ul"
+            for a in d.find_all("a"):
+                a.wrap(soup.new_tag("li"))
+        for d in main.select(".micro > div, .step"):
+            d.name = "p"
+        for d in main.find_all("details"):
+            q = d.find("summary"); qt = q.get_text(" ", strip=True); q.decompose()
+            d.replace_with(BeautifulSoup(f"<h3>{qt}</h3>{d.decode_contents()}", "html.parser"))
+        for a in main.find_all("a", href=True):
+            if a["href"].startswith("/"):
+                a["href"] = SITE["domain"] + a["href"]
+            elif a["href"].startswith("#"):
+                a.unwrap()
+        body = markdownify(str(main), heading_style="ATX", bullets="-", strip=["main", "section", "div", "span", "figure"])
+        body = re.sub(r"\n{3,}", "\n\n", body).strip()
+        m = META[path]
+        head = (f"---\ntitle: \"{m['title']}\"\ndescription: \"{m['desc']}\"\ncanonical: {SITE['domain']}{path}\nupdated: {lm}\npublisher: {SITE['name']} ({SITE['operator']})\n---\n\n"
+                f"Markdown version of {SITE['domain']}{path}. Prices are typical market estimates, not quotes. To get a price, use the form on the canonical page or email {SITE['email']}.\n\n")
+        (OUT / md_path(path).lstrip("/")).write_text(head + body + "\n", encoding="utf-8")
+    lines = [f"# {SITE['name']}: content map", "", f"Every public page on {SITE['domain']} with its Markdown version. Updated {SITE['updated_iso']}.", ""]
+    for name, test in TOPICS:
+        rows = [p for p, _, _ in PAGES if test(p)]
+        if rows:
+            lines += [f"## {name}", ""] + [f"- [{META[p]['title'].split(' | ')[0]}]({SITE['domain']}{md_path(p)}): {META[p]['desc']} Canonical: {SITE['domain']}{p}" for p in rows] + [""]
+    (OUT / "sitemap.md").write_text("\n".join(lines), encoding="utf-8")
+
+
 def finish():
+    export_markdown()
     # sitemap
     urls = "".join(f'<url><loc>{SITE["domain"]}{p}</loc><lastmod>{lm}</lastmod><priority>{pr:.1f}</priority></url>' for p, pr, lm in PAGES if p != "/404.html")
-    (OUT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
-    (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /thank-you/\n\nSitemap: {SITE['domain']}/sitemap.xml\n")
+    hint = f"<!-- Markdown versions of these pages: {SITE['domain']}/llms.txt and {SITE['domain']}/sitemap.md -->"
+    (OUT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{hint}{urls}</urlset>\n')
+    (OUT / "robots.txt").write_text(f"# Markdown guide to this site: {SITE['domain']}/llms.txt\n# Content map with Markdown answers: {SITE['domain']}/sitemap.md\nUser-agent: *\nAllow: /\nDisallow: /thank-you/\n\nSitemap: {SITE['domain']}/sitemap.xml\n")
     (OUT / f"{SITE['indexnow_key']}.txt").write_text(SITE["indexnow_key"])
     lines = [f"# {SITE['name']}", "", f"> Gutter cleaning, downpipe unblocking and gutter repairs across {SITE['region']}. Enquiries by email go to one vetted local gutter specialist per area. Typical prices are published and confirmed before booking.", "",
-             "## Prices", f"- [Gutter cleaning cost and estimator]({SITE['domain']}/advice/gutter-cleaning-cost/): " + "; ".join(f"{b['label']} £{b['low']}-£{b['high']}" for b in PRICE_BANDS), "",
-             "## Services"] + [f"- [{s['name']}]({SITE['domain']}/services/{s['slug']}/): {s['short']}" for s in SERVICES] + ["", "## Areas"] + \
-            [f"- [{a['name']}]({SITE['domain']}{'/' if a['slug'] == 'farnborough' else '/areas/' + a['slug'] + '/'}): {', '.join(a['postcodes'])}, {a['county']}" for a in AREAS] + ["", "## Guides"] + \
-            [f"- [{g['name']}]({SITE['domain']}/advice/{g['slug']}/)" for g in GUIDES] + ["", f"Contact: {SITE['email']}"]
+             "If you are an LLM looking for site information, use the [content map](" + SITE['domain'] + "/sitemap.md) to locate the relevant topic and its linked Markdown answer. Use that document's cited sources and canonical page; if the requested information is absent, report that gap.", "",
+             "## Prices", f"- [Gutter cleaning cost and estimator]({SITE['domain']}/advice/gutter-cleaning-cost/index.md): " + "; ".join(f"{b['label']} £{b['low']}-£{b['high']}" for b in PRICE_BANDS), "",
+             "## Services"] + [f"- [{s['name']}]({SITE['domain']}/services/{s['slug']}/index.md): {s['short']}" for s in SERVICES] + ["", "## Areas"] + \
+            [f"- [{a['name']}]({SITE['domain']}{'/index.md' if a['slug'] == 'farnborough' else '/areas/' + a['slug'] + '/index.md'}): {', '.join(a['postcodes'])}, {a['county']}" for a in AREAS] + ["", "## Guides"] + \
+            [f"- [{g['name']}]({SITE['domain']}/advice/{g['slug']}/index.md): {g['short']}" for g in GUIDES] + ["", "## Optional", f"- [Landlords and agents]({SITE['domain']}/landlords/index.md)", f"- [About]({SITE['domain']}/about/index.md)", f"- [Statistics CSV]({SITE['domain']}/data/gutter-statistics.csv)", "", f"Contact: {SITE['email']} (email only, no phone line)."]
     (OUT / "llms.txt").write_text("\n".join(lines) + "\n")
     # Area sheet export (the "Google Sheet" of locations)
     with open(ROOT.parent / "area-sheet.csv", "w", newline="") as f:

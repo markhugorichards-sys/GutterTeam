@@ -5,7 +5,7 @@
 <p class="crumbs"><a href="/">Home</a> / <a href="/areas/">Areas</a> / {{ a.name }}</p>
 <p class="eyebrow">{{ a.postcodes|join(', ') }} &middot; {{ a.county }}</p>
 <h1>Gutter cleaning in {{ a.name }}</h1>
-<p class="lead">{{ a.intro }}</p>
+<p class="lead">Gutter cleaning in {{ a.name }} typically costs &pound;{{ semi.low }} to &pound;{{ semi.high }} for a semi-detached house and &pound;{{ det.low }} to &pound;{{ det.high }} for a detached house. Send the form and one vetted gutter specialist covering {{ a.name }} replies by email with a confirmed price.</p>
 <ul class="ticks">
 <li>Typical {{ a.name }} prices shown below, confirmed before booking</li>
 <li>Before and after photos of every gutter run</li>
@@ -17,32 +17,36 @@
 
 <section class="band"><div class="wrap grid2">
 <div class="prose">
-<h2>Neighbourhoods covered in {{ a.name }}</h2>
+<h2>Which parts of {{ a.name }} are covered?</h2>
+<p>{{ a.intro }}</p>
 <div class="micro">{% for n, d in a.micro %}<div><strong>{{ n }}</strong><br>{{ d }}</div>{% endfor %}</div>
 </div>
 <div class="prose">
-<h2>{{ a.name }} homes and their gutters</h2>
+<h2>What are {{ a.name }} homes and gutters like?</h2>
 {% for era, d in a.housing %}<h3>{{ era }}</h3><p>{{ d }}</p>{% endfor %}
 </div>
 </div></section>
 
 <section class="band alt"><div class="wrap grid2">
 <div class="prose">
-<h2>Trees, water and what they mean for your gutters</h2>
+<h2>How do {{ a.name }}&rsquo;s trees affect your gutters?</h2>
 <p>{{ a.trees }}</p>
 {% if a.water %}<p>{{ a.water }}</p>{% endif %}
-<h3>Problems we see most in {{ a.name }}</h3>
+<h3>What problems are most common in {{ a.name }}?</h3>
 <ul>{% for i in a.issues %}<li>{{ i }}</li>{% endfor %}</ul>
 <div class="note"><strong>Best time to book in {{ a.name }}:</strong> {{ a.timing }}</div>
 </div>
 <div class="prose">
-<h2>Gutter cleaning prices in {{ a.name }}</h2>
+<h2>How much does gutter cleaning cost in {{ a.name }}?</h2>
 <p>{{ a.price_note }}</p>
 {{ m.price_table(bands) }}
 <p class="small">Typical bands for a standard clean with downpipe check, compiled from published 2026 UK price guides with the South East uplift. Estimates, not quotes. Try the <a href="/advice/gutter-cleaning-cost/">price estimator</a> for add-ons.</p>
 </div>
 </div></section>
 
+{% if a.extra %}
+<section class="band"><div class="wrap prose">{{ a.extra|safe }}</div></section>
+{% endif %}
 {% if jobs %}
 <section class="band"><div class="wrap">
 <div class="sec-head"><h2>Recent gutter jobs in {{ a.name }}</h2><p>Real visits, photographed on the day.</p></div>

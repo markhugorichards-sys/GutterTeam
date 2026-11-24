@@ -6,6 +6,7 @@
 <title>{{ title }}</title>
 <meta name="description" content="{{ desc }}">
 <link rel="canonical" href="{{ site.domain }}{{ path }}">
+{% if md_alt %}<link rel="alternate" type="text/markdown" href="{{ md_alt }}">{% endif %}
 <meta name="robots" content="{{ 'noindex, follow' if noindex else 'index, follow, max-image-preview:large' }}">
 <meta property="og:type" content="{{ og_type or 'website' }}">
 <meta property="og:site_name" content="{{ site.name }}">
