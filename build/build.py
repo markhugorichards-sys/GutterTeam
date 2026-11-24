@@ -33,7 +33,9 @@ def md_path(path):
 def md(text, fmt=None):
     if fmt:
         text = text % fmt
-    return markdown.markdown(text, extensions=["tables"])
+    html = markdown.markdown(text, extensions=["tables"])
+    # wrap markdown tables so wide ones scroll inside their box instead of widening the page on phones
+    return html.replace("<table>", '<div class="tablewrap"><table>').replace("</table>", "</table></div>")
 
 
 def ld(obj):
